@@ -1,0 +1,10 @@
+{
+  "LO-104": {
+    "error_code": 104,
+    "message": "Lỗi cú pháp",
+    "details": [
+      "Email là bắt buộc",
+      "Mật khẩu là bắt buộc"
+    ]
+  }
+}

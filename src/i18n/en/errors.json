@@ -1,0 +1,10 @@
+{
+  "LO-104": {
+    "error_code": 104,
+    "message": "Invalid syntax",
+    "details": [
+      "The email field is required",
+      "The password field is required"
+    ]
+  }
+}

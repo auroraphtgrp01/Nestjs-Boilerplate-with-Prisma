@@ -1,0 +1,46 @@
+version: '3.9'
+networks:
+  cme-network:
+    name: "cme-network"
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.5.0.0/16
+          ip_range: 10.5.0.0/24
+          gateway: 10.5.0.1
+          aux_addresses:
+            kafka: 10.5.0.2
+            zookeeper: 10.5.0.3
+
+services:
+  postgres:
+    image: bitnami/postgresql:latest
+    container_name: postgres
+    volumes:
+      - postgres-data:/bitnami/postgresql
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - '5432:5432'
+    networks:
+      - "cme-network"
+
+  redis:
+    container_name: redis
+    image: bitnami/redis:latest
+    ports:
+      - 6379:6379
+    environment:
+      REDIS_PASSWORD: your_password_here
+    volumes:
+      - redis-data:/bitnami/redis
+    restart: unless-stopped
+    networks:
+      - "cme-network"
+
+volumes:
+  postgres-data:
+  redis-data:
+    driver: local
